@@ -138,7 +138,7 @@ export default function AddressForm({ isOpen, setIsOpen, type }: any) {
                                         <input
                                             type="text"
                                             name="buildingName"
-                                            value={formData.buildingName}
+                                            value={formData?.buildingName}
                                             onChange={handleChange}
                                             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                                             placeholder="Enter building name"

@@ -272,7 +272,7 @@ export default function CheckCompliancePage() {
                 </div>
 
                 {/* Map Sheet component */}
-                <MapSheet isOpen={isOpen} setOpen={setOpen} type={type} />
+                <MapSheet isOpen={isOpen} setOpen={setOpen} type={type} data={data} />
             </div>
         </div>
     );

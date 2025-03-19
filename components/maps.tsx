@@ -5,7 +5,7 @@ import { Sheet } from 'react-modal-sheet';
 import { addSourceAddress, addDestinationAddress } from '@/utils/api.utils';
 
 // Use LoadScriptOnce to prevent multiple script loads
-const MapSheet = ({ isOpen, setOpen, type }: any) => {
+const MapSheet = ({ isOpen, setOpen, type, data }: any) => {
     const [searchInput, setSearchInput] = useState<any>('');
     const [suggestions, setSuggestions] = useState<any>([]);
     const [selectedLocation, setSelectedLocation] = useState<any>(null);
@@ -16,7 +16,7 @@ const MapSheet = ({ isOpen, setOpen, type }: any) => {
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
     const suggestionRef = useRef(null);
-    
+
     // Store the script's loaded state in a ref to prevent re-renders
     const googleMapsLoaded = useRef(false);
 
@@ -85,9 +85,16 @@ const MapSheet = ({ isOpen, setOpen, type }: any) => {
         };
         console.log('Location Data:', locationData);
         if (type === 'source') {
+            if (data) {
+                console.log(data)
+                data.data.sourceAddresses.push(locationData);
+            }
             addSourceAddress(locationData);
             setOpen(false);
         } else {
+            if (data) {
+                data.data.destinationAddresses.push(locationData);
+            }
             addDestinationAddress(locationData);
             setOpen(false);
         }
@@ -143,7 +150,7 @@ const MapSheet = ({ isOpen, setOpen, type }: any) => {
 
         // If not loaded, use LoadScript (will only happen once)
         return (
-            <LoadScript 
+            <LoadScript
                 googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY || ''}
                 onLoad={() => { googleMapsLoaded.current = true; }}
             >

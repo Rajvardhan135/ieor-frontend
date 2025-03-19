@@ -26,7 +26,9 @@ export default function ShipmentDashboard() {
     const [selectedShipment, setSelectedShipment] = useState<any>(null);
     const [reportData, setReportData] = useState<any>(null);
     const [isLoadingReport, setIsLoadingReport] = useState(false);
-    const [viewMode, setViewMode] = useState('list'); // 'list' or 'report'
+    const [viewMode, setViewMode] = useState('list'); // 'list' or 'report'4
+
+    console.log(reportData)
 
     const formatDate = (dateString: any) => {
         if (!dateString) return 'N/A';
@@ -176,20 +178,8 @@ export default function ShipmentDashboard() {
                                     <MapPin size={18} className="text-blue-500" />
                                     <h3 className="font-medium">Origin</h3>
                                 </div>
-                                <p className="font-semibold text-gray-800">{reportData?.summary?.organizationName || 'N/A'}</p>
-                                {reportData?.summary?.sourceAdress && (
-                                    <>
-                                        <p className="text-gray-600 mt-1">
-                                            {reportData.summary.sourceAdress.buildingName || ''}{reportData.summary.sourceAdress.buildingName ? ', ' : ''}
-                                            {reportData.summary.sourceAdress.floor ? `Floor ${reportData.summary.sourceAdress.floor}` : ''}
-                                        </p>
-                                        {reportData.summary.sourceAdress.googleMapAddress && (
-                                            <p className="text-gray-600">
-                                                {reportData.summary.sourceAdress.googleMapAddress}
-                                            </p>
-                                        )}
-                                    </>
-                                )}
+                                <p className="font-semibold text-gray-800">{reportData?.summary?.sourceCountry || 'N/A'}</p>
+
                             </div>
 
                             {/* Destination */}
@@ -198,19 +188,7 @@ export default function ShipmentDashboard() {
                                     <MapPin size={18} className="text-blue-500" />
                                     <h3 className="font-medium">Destination</h3>
                                 </div>
-                                {reportData?.summary?.destinationAdress && (
-                                    <>
-                                        <p className="font-semibold text-gray-800">
-                                            {reportData.summary.destinationAdress.city || ''}{reportData.summary.destinationAdress.city && reportData.summary.destinationAdress.country ? ', ' : ''}
-                                            {reportData.summary.destinationAdress.country || 'N/A'}
-                                        </p>
-                                        {reportData.summary.destinationAdress.googleMapAddress && (
-                                            <p className="text-gray-600">
-                                                {reportData.summary.destinationAdress.googleMapAddress}
-                                            </p>
-                                        )}
-                                    </>
-                                )}
+                                <p className="font-semibold text-gray-800">{reportData?.summary?.destinationCountry || 'N/A'}</p>
                             </div>
                         </div>
 
